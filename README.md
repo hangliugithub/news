@@ -2,7 +2,7 @@
 
 架构的基本样子
 
-![1539828111931](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1539828111931.png)
+![1539828111931](images\1539828111931.png)
 
 
 
