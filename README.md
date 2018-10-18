@@ -2,9 +2,7 @@
 
 架构的基本样子
 
-![1539828111931](images\1539828111931.png)
-
-
+![1539828111931](https://github.com/hangliugithub/news/blob/master/images/1539828111931.png)
 
 当然中间数据库分片的mycat可以用keepalived+haproxy+mycat 实现mycat这个中间件的高可用上图自己画的时候忘掉了
 
