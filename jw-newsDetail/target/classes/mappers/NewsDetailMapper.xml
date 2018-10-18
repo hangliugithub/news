@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jw.news.mapper.NewsDetailMapper">
+
+	<resultMap type="News" id="NewsList">
+		<id column="news_id" property="newsId"/>
+		<result column="news_title" property="newsTitle"/>
+		<result column="news_category" property="newsCategory"/>
+		<result column="news_desc" property="newsDesc"/>
+		<result column="news_image" property="newsImage"/>
+		<result column="news_text" property="newsText"/>
+		<result column="thumbs" property="thumbs"/>
+		<result column="news_score" property="newsScore"/>
+		<result column="news_post" property="newsPost"/>
+		<result column="news_fetch" property="newsFetch"/>
+		<result column="news_hide" property="newsHide"/>
+	</resultMap>
+	
+	<resultMap type="Comment" id="CommentList">
+		<id column="comment_id" property="commentId"/>
+		<result column="comment_desc" property="commentDesc"/>
+		<result column="create_date" property="createDate"/>
+		<result column="last_modify" property="latestModify"/>
+		<result column="hide" property="hide"/>
+		<association property="user" javaType="User">
+			<id column="user_id" property="userId"/>
+			<result column="user_name" property="userName"/>
+			<result column="nick_name" property="nickName"/>
+			<result column="head_portrait" property="headPortrait"/>
+		</association>
+	</resultMap>
+	
+	<!-- 总览页的分页查询 -->
+	<select id="queryAll" parameterType="Page"
+	resultMap="NewsList" >
+		SELECT
+			n.news_id,
+			n.news_title,
+			n.news_desc,
+			n.news_image,
+			n.news_text,
+			n.thumbs				
+		FROM 
+			jw_news n
+		WHERE
+			news_category = #{category}
+		ORDER BY 
+			news_score desc
+		limit #{begin}, #{pageSize}	    
+	</select>
+	
+	<!-- 总览页的最新新闻更新 -->
+	<select id="queryLatestNews" parameterType="int"
+	resultMap="NewsList">
+	SELECT
+			n.news_id,
+			n.news_title,
+			n.news_category,
+			n.news_desc,
+			n.news_image
+		FROM 
+			jw_news n		
+		ORDER BY 
+			news_fetch desc, 
+			news_id DESC
+		limit 0, #{newsNum}		
+	</select>
+	
+	<!-- 总览页的最新评论更新 -->
+	<select id="queryLatestComment" parameterType="int"
+	resultMap="CommentList">
+		SELECT
+			c.comment_id,
+			c.hide,
+			c.comment_desc,
+			c.create_date,
+			c.latest_modify,
+			u.user_id,
+			u.user_name,
+			u.head_portrait
+		FROM 
+			jw_comment c,
+			jw_user u
+		WHERE
+			c.cuser_id = u.user_id
+		ORDER BY 
+			c.create_date DESC, 
+			c.comment_id DESC
+		LIMIT 0, #{commentNum};
+	</select>
+</mapper>

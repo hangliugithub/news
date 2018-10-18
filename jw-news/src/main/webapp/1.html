@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+    function createOrder(){
+        coffee=document.forms[0].coffee;
+        txt=""
+        for (i=0;i<coffee.length;++ i){
+            if (coffee[i].checked){
+            txt=txt + coffee[i].value + " "
+            }
+        }
+        document.getElementById("order").value="你选择的答案是： "+ JSON.stringify(txt);
+    }
+</script>
+</head>
+
+<body>
+<p>复选框</p>
+<form>
+    <input type="checkbox" name="coffee" value="A">A<br />
+    <input type="checkbox" name="coffee" value="B">B<br />
+    <input type="checkbox" name="coffee" value="C">C<br />
+    <input type="checkbox" name="coffee" value="D">D<br />
+    <input type="button" onclick="createOrder()" value="确认并提交"><br /><br />
+    <input type="text" id="order" size="20">
+</form>
+</body

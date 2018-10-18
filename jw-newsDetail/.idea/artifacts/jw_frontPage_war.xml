@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="jw-frontPage:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="jw-newsDetail.war">
+      <element id="artifact" artifact-name="jw-frontPage:war exploded" />
+    </root>
+  </artifact>
+</component>
